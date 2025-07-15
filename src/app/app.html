@@ -1,0 +1,114 @@
+<style>
+  main {
+    width: 100%;
+    min-height: 100vh;
+    background: #dfcbcb;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+
+  .contenedor {
+    max-width: 600px;
+    width: 100%;
+    background: rgb(49, 5, 121);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+
+  h1 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #eee7e7;
+  }
+
+  label {
+    font-weight: bold;
+    margin-top: 1rem;
+    display: block;
+  }
+
+  input[type="date"],
+  input[type="number"] {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+
+  button {
+    margin-top: 1rem;
+    padding: 0.6rem;
+    font-size: 1rem;
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #004a99;
+  }
+
+  p {
+    margin-top: 1rem;
+    font-weight: bold;
+  }
+
+  hr {
+    margin: 2rem 0;
+    border: none;
+    border-top: 1px solid #ddd;
+  }
+
+  ul {
+    margin-top: 1rem;
+    padding-left: 1rem;
+  }
+
+  li {
+    margin-bottom: 1.2rem;
+  }
+
+  small {
+    color: #eee8e8;
+    font-size: 0.9rem;
+  }
+</style>
+
+<main>
+  <div class="contenedor">
+    <h1> Verificador de Festivos Colombia</h1>
+
+    <label for="fecha">Selecciona una fecha para verificar:</label>
+    <input type="date" id="fecha" [(ngModel)]="fechaConsulta" />
+    <button (click)="verificarFecha()">Verificar fecha</button>
+    <p>Fecha seleccionada: {{ fechaConsulta }}</p>
+
+
+    <p *ngIf="mostrarResultadoVerificacion">{{ resultadoVerificacion }}</p>
+
+    <hr />
+
+    <label for="anio">Consultar festivos del año:</label>
+    <input type="number" id="anio" [(ngModel)]="anioConsulta" />
+    <button (click)="consultarFestivosPorAnio()">Buscar festivos de {{ anioConsulta }}</button>
+
+    <h2 style="margin-top: 2rem;"> Festivos del {{ anioConsulta }}</h2>
+    <ul>
+      <li *ngFor="let festivo of festivosAnio">
+        <strong>{{ festivo.nombre }}</strong> – {{ festivo.fecha }}
+      </li>
+    </ul>
+  </div>
+</main>
+
+
+
+<router-outlet />
